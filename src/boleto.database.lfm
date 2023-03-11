@@ -1,0 +1,25 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 265
+  HorizontalOffset = 242
+  VerticalOffset = 456
+  Width = 314
+  object Conexao: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = True
+    Properties.Strings = (
+      'AutoEncodeStrings=True'
+      'controls_cp=CP_UTF8'
+    )
+    AutoCommit = False
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'ssw7'
+    User = 'root'
+    Password = 'root'
+    Protocol = 'mysql-5'
+    LibraryLocation = 'C:\lazarus\projetos\ssw-boleto\bin\libmySQL.dll'
+    Left = 48
+    Top = 40
+  end
+end

@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="boleto.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="73" Y="17"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
@@ -17,10 +17,10 @@
         <Filename Value="src\boleto.view.principal.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="PrincipalView"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="51"/>
-        <CursorPos X="13" Y="67"/>
+        <TopLine Value="62"/>
+        <CursorPos X="7" Y="74"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -35,8 +35,8 @@
       <Unit>
         <Filename Value="src\boleto.util.biblioteca.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="22" Y="16"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="20" Y="3"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
@@ -46,6 +46,19 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="55" Y="15"/>
         <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="src\boleto.database.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DM"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="13" Y="2"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="module\horse-logger-provider-logfile\Horse.Logger.Provider.LogFile.pas"/>
@@ -61,7 +74,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="19">
+    <JumpHistory HistoryIndex="21">
       <Position>
         <Filename Value="src\boleto.view.principal.pas"/>
         <Caret Line="11" Column="24"/>
@@ -141,6 +154,14 @@
       <Position>
         <Filename Value="src\boleto.view.principal.pas"/>
         <Caret Line="73" TopLine="55"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="11" Column="7"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="14" Column="7"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -26,6 +26,12 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="zcomponent"/>
+      </Item>
+      <Item>
+        <PackageName Value="pckZeosConn"/>
+      </Item>
+      <Item>
         <PackageName Value="rxnew"/>
       </Item>
       <Item>
@@ -47,6 +53,7 @@
         <Filename Value="src\boleto.view.principal.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="PrincipalView"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
       <Unit>
@@ -60,6 +67,13 @@
       <Unit>
         <Filename Value="src\boleto.util.terceiro.j4dl.pas"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="src\boleto.database.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DM"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
       </Unit>
     </Units>
   </ProjectOptions>
