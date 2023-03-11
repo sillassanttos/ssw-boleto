@@ -1,13 +1,21 @@
 unit boleto.view.principal;
 
-{$mode objfpc}{$H+}
+{$MODE DELPHI}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs;
+  Classes,
+  SysUtils,
+  Forms,
+  Controls,
+  Graphics,
+  Dialogs;
 
 type
+
+  { TPrincipalView }
+
   TPrincipalView = class(TForm)
   private
 

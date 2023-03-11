@@ -10,7 +10,10 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, boleto.view.principal
+  Forms,
+  indylaz,
+  boleto.view.principal,
+  boleto.util.converte.arquivo.base64
   { you can add units after this };
 
 {$R *.res}
