@@ -14,6 +14,7 @@ uses
   ComCtrls,
   ExtCtrls,
   StdCtrls,
+  IniFiles,
   rxspin,
   rxctrls,
   Horse,
@@ -27,9 +28,6 @@ uses
   boleto.util.biblioteca;
 
 type
-
-  { TPrincipalView }
-
   TPrincipalView = class(TForm)
     btnIniciar: TButton;
     pnlTitulo: TPanel;
@@ -56,15 +54,23 @@ implementation
 
 procedure TPrincipalView.FormCreate(Sender: TObject);
 begin
-  Self.Caption := 'Boleto';
+  with TIniFile.Create(ChangeFileExt('boleto', '.ini')) do
+  try
+    GCaptionApp := ReadString('Licenca', 'Caption', '');
+    GTituloApp := ReadString('Licenca', 'Titulo', '');
+    edtPorta.Value := ReadInt64('Servidor', 'Porta', 8883);
+    stbPrincipal.Panels[0].Text := Concat('Licenciado para: ', ReadString('Licenca', 'Licenciado', ''));
+  finally
+    Free;
+  end;
 
-  pnlTitulo.Caption := captionApp;
+  Self.Caption := GCaptionApp;
 
-  edtPorta.Value := 8883;
+  pnlTitulo.Caption := GTituloApp;
 
-
-  LLogFileConfig := THorseLoggerLogFileConfig.New
-    .SetDir(ExtractFilePath(ParamStr(0)) + 'Log\');
+  LLogFileConfig := THorseLoggerLogFileConfig
+    .New
+      .SetDir(ExtractFilePath(ParamStr(0)) + 'Log\');
 
   THorseLoggerManager.RegisterProvider(THorseLoggerProviderLogFile.New());
 
@@ -94,13 +100,13 @@ begin
     THorse.Port := edtPorta.AsInteger;
     THorse.Listen;
     btnIniciar.Caption := 'Parar';
-    Self.Caption := Concat(CAPTIONAPP, ' [Serviço rodando na porta: ', THorse.Port.ToString, ']');
+    Self.Caption := Concat(GTituloApp, ' [Serviço rodando na porta: ', THorse.Port.ToString, ']');
   end
   else
   begin
     THorse.StopListen;
     btnIniciar.Caption := 'Iniciar';
-    Self.Caption := Concat(CAPTIONAPP, ' [Servidor Parado]');
+    Self.Caption := Concat(GTituloApp, ' [Servidor Parado]');
   end;
 end;
 

@@ -9,7 +9,7 @@
         <Filename Value="boleto.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="3" Y="15"/>
+        <CursorPos X="73" Y="17"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
@@ -19,8 +19,8 @@
         <ComponentName Value="PrincipalView"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="58"/>
-        <CursorPos X="38" Y="94"/>
+        <TopLine Value="51"/>
+        <CursorPos X="13" Y="67"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -36,7 +36,7 @@
         <Filename Value="src\boleto.util.biblioteca.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="3" Y="18"/>
+        <CursorPos X="22" Y="16"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
@@ -61,7 +61,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="17">
+    <JumpHistory HistoryIndex="19">
       <Position>
         <Filename Value="src\boleto.view.principal.pas"/>
         <Caret Line="11" Column="24"/>
@@ -133,6 +133,14 @@
       <Position>
         <Filename Value="src\boleto.view.principal.pas"/>
         <Caret Line="99" Column="49" TopLine="68"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.view.principal.pas"/>
+        <Caret Line="56" Column="8" TopLine="38"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.view.principal.pas"/>
+        <Caret Line="73" TopLine="55"/>
       </Position>
     </JumpHistory>
     <RunParams>
