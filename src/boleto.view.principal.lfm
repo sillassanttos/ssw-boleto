@@ -1,0 +1,8 @@
+object PrincipalView: TPrincipalView
+  Left = 237
+  Height = 240
+  Top = 86
+  Width = 320
+  Caption = 'PrincipalView'
+  LCLVersion = '2.2.6.0'
+end
