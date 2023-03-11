@@ -14,6 +14,7 @@ function IfThen(ACondicao: Boolean; AVerdadeiro, AFalso: string): string;
 var
   GCaptionApp: string;
   GTituloApp: string;
+  GPrefixo: string;
 
 const
 

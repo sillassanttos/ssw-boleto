@@ -1,5 +1,4 @@
 object DM: TDM
-  OnCreate = DataModuleCreate
   OldCreateOrder = False
   Height = 265
   HorizontalOffset = 242

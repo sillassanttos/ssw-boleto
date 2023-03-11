@@ -1,6 +1,6 @@
 program boleto;
 
-{$mode objfpc}{$H+}
+{$MODE DELPHI}{$H+}
 
 uses
   {$IFDEF UNIX}
@@ -16,7 +16,9 @@ uses
   boleto.view.principal,
   boleto.util.converte.arquivo.base64,
   boleto.util.biblioteca,
-  boleto.util.terceiro.j4dl, boleto.database;
+  boleto.util.terceiro.j4dl,
+  boleto.database,
+  boleto.controller;
 
 {$R *.res}
 

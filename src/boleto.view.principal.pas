@@ -25,7 +25,8 @@ uses
   Horse.Logger.Provider.LogFile,
   //DataSet.Serialize,
   //DataSet.Serialize.Config,
-  boleto.util.biblioteca;
+  boleto.util.biblioteca,
+  boleto.controller;
 
 type
   TPrincipalView = class(TForm)
@@ -58,6 +59,7 @@ begin
   try
     GCaptionApp := ReadString('Licenca', 'Caption', '');
     GTituloApp := ReadString('Licenca', 'Titulo', '');
+    GPrefixo := ReadString('API', 'Prefixo', 'ssw/boleto/');
     edtPorta.Value := ReadInt64('Servidor', 'Porta', 8883);
     stbPrincipal.Panels[0].Text := Concat('Licenciado para: ', ReadString('Licenca', 'Licenciado', ''));
   finally
@@ -80,8 +82,7 @@ begin
     //.Use(OctetStream)
     .Use(THorseLoggerManager.HorseCallback);
 
-  //SSW.Boleto.Controllers.Boleto.Registry;
-
+  TBoletoController.Registry;
 end;
 
 procedure TPrincipalView.FormCloseQuery(Sender: TObject; var CanClose: Boolean);

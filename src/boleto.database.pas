@@ -11,13 +11,9 @@ uses
   ZConnection;
 
 type
-
-  { TDM }
-
   TDM = class(TDataModule)
     Conexao: TZConnection;
     procedure ConexaoBeforeConnect(Sender: TObject);
-    procedure DataModuleCreate(Sender: TObject);
   private
 
   public
@@ -30,13 +26,6 @@ var
 implementation
 
 {$R *.lfm}
-
-{ TDM }
-
-procedure TDM.DataModuleCreate(Sender: TObject);
-begin
-
-end;
 
 procedure TDM.ConexaoBeforeConnect(Sender: TObject);
 begin
