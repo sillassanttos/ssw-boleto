@@ -26,6 +26,21 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+      <Item>
+        <PackageName Value="ACBrTCP"/>
+      </Item>
+      <Item>
+        <PackageName Value="ACBr_BoletoFC_Fortes"/>
+      </Item>
+      <Item>
+        <PackageName Value="ACBr_Boleto"/>
+      </Item>
+      <Item>
+        <PackageName Value="ACBrDiversos"/>
+      </Item>
+      <Item>
         <PackageName Value="zcomponent"/>
       </Item>
       <Item>

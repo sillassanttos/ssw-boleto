@@ -8,9 +8,9 @@
       <Unit>
         <Filename Value="boleto.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="6"/>
         <CursorPos X="15" Y="11"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -19,33 +19,35 @@
         <ComponentName Value="PrincipalView"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <TopLine Value="41"/>
+        <TopLine Value="21"/>
         <CursorPos X="2" Y="57"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="src\boleto.util.converte.arquivo.base64.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="19"/>
-        <UsageCount Value="21"/>
+        <EditorIndex Value="5"/>
+        <CursorPos X="41"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="src\boleto.util.biblioteca.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="3" Y="17"/>
-        <UsageCount Value="21"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="69" Y="13"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="src\boleto.util.terceiro.j4dl.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="3"/>
         <CursorPos X="31"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="src\boleto.database.pas"/>
@@ -55,11 +57,20 @@
         <ResourceBaseClass Value="DataModule"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="14"/>
-        <CursorPos X="34" Y="27"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="98"/>
+        <CursorPos Y="113"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="src\boleto.controller.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="11"/>
+        <CursorPos X="20" Y="12"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="module\horse-logger-provider-logfile\Horse.Logger.Provider.LogFile.pas"/>
@@ -75,135 +86,133 @@
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="src\boleto.controller.pas"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="11"/>
-        <CursorPos X="2" Y="24"/>
-        <UsageCount Value="21"/>
-        <Loaded Value="True"/>
+        <Filename Value="C:\AcbrLaz\Fontes\ACBrComum\ACBrUtil.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="220"/>
+        <CursorPos X="10" Y="237"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="34" Column="31" TopLine="13"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="22" Column="24" TopLine="11"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="45" TopLine="14"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="18" Column="63"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="6" TopLine="4"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="74" Column="25" TopLine="62"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="79" Column="28" TopLine="67"/>
-      </Position>
-      <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="16" Column="13" TopLine="11"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="91" Column="34" TopLine="90"/>
       </Position>
       <Position>
         <Filename Value="src\boleto.database.pas"/>
-        <Caret Line="18" Column="13" TopLine="16"/>
+        <Caret Line="45" Column="15" TopLine="29"/>
       </Position>
       <Position>
-        <Filename Value="boleto.lpr"/>
-        <Caret Line="3" Column="24"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="89" Column="3" TopLine="85"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="21" Column="11"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="46" Column="15" TopLine="29"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="36" TopLine="16"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="50" Column="26" TopLine="44"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="20" Column="18"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="540" TopLine="507"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="26" TopLine="16"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="45" Column="22" TopLine="31"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="32" Column="22" TopLine="12"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="111" Column="7" TopLine="90"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="58" TopLine="46"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="110" Column="3" TopLine="89"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="12" Column="12"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="448" Column="18" TopLine="431"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="16" Column="19" TopLine="13"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="45" Column="23" TopLine="43"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="38" Column="18" TopLine="12"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="144" Column="13" TopLine="130"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="37" Column="13" TopLine="11"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="110" Column="29" TopLine="219"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="57" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="119" Column="25" TopLine="110"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="58" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="542" Column="38" TopLine="533"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="59" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="543" Column="22" TopLine="532"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="60" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="542" Column="53" TopLine="532"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="61" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="541" Column="53" TopLine="531"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="62" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="464" Column="29" TopLine="448"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="63" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="40" Column="22" TopLine="31"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.view.principal.pas"/>
-        <Caret Line="57" Column="2" TopLine="41"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="92" Column="11" TopLine="85"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="30" Column="18" TopLine="11"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="536" Column="32" TopLine="525"/>
       </Position>
       <Position>
-        <Filename Value="src\boleto.controller.pas"/>
-        <Caret Line="28" Column="9" TopLine="11"/>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="106" Column="3" TopLine="86"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="43" Column="16" TopLine="24"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="179" Column="34" TopLine="168"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="40" Column="20" TopLine="26"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="97" Column="8" TopLine="87"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="44" Column="17" TopLine="23"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="236" Column="33" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="src\boleto.database.pas"/>
+        <Caret Line="40" Column="15" TopLine="27"/>
       </Position>
     </JumpHistory>
     <RunParams>

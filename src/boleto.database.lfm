@@ -1,9 +1,11 @@
 object DM: TDM
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   OldCreateOrder = False
-  Height = 265
+  Height = 197
   HorizontalOffset = 242
   VerticalOffset = 456
-  Width = 314
+  Width = 437
   object Conexao: TZConnection
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = True
@@ -12,14 +14,85 @@ object DM: TDM
       'controls_cp=CP_UTF8'
     )
     AutoCommit = False
+    Connected = True
     BeforeConnect = ConexaoBeforeConnect
     HostName = 'localhost'
     Port = 3306
-    Database = 'ssw7'
+    Database = 'ssw8'
     User = 'root'
     Password = 'root'
     Protocol = 'mysql-5'
     Left = 48
     Top = 40
+  end
+  object ACBrExtenso: TACBrExtenso
+    StrMoeda = 'Real'
+    StrMoedas = 'Reais'
+    StrCentavo = 'Centavo'
+    StrCentavos = 'Centavos'
+    Left = 136
+    Top = 40
+  end
+  object ACBrBoleto1: TACBrBoleto
+    MAIL = ACBrMail1
+    Banco.Numero = 104
+    Banco.TamanhoMaximoNossoNum = 15
+    Banco.TipoCobranca = cobCaixaEconomica
+    Banco.OrientacoesBanco.Strings = (
+      'SAC CAIXA: 0800 726 0101 (informações, reclamações, sugestões e elogios) '#13#10'Para pessoas com deficiência auditiva ou de fala: 0800 726 2492 '#13#10'Ouvidoria: 0800 725 7474 (reclamações não solucionadas e denúncias) '#13#10'caixa.gov.br '
+    )
+    Banco.LayoutVersaoArquivo = 0
+    Banco.LayoutVersaoLote = 0
+    Banco.CasasDecimaisMoraJuros = 2
+    Cedente.Nome = 'VB SYSTEM AUTOMAÇÃO LTDA.'
+    Cedente.CodigoCedente = '572814'
+    Cedente.Agencia = '00097'
+    Cedente.AgenciaDigito = '0'
+    Cedente.Conta = '0000002359'
+    Cedente.ContaDigito = '4'
+    Cedente.CNPJCPF = '07.193.169/0001-54'
+    Cedente.TipoInscricao = pJuridica
+    Cedente.Logradouro = 'RUA PRESIDENTE OLEGARIO MACIEL, 111'
+    Cedente.Complemento = 'SALA 510'
+    Cedente.Bairro = 'CENTRO'
+    Cedente.Cidade = 'ARAXA'
+    Cedente.UF = 'MG'
+    Cedente.CEP = '38183186'
+    Cedente.Telefone = '34 3661.5131'
+    Cedente.IdentDistribuicao = tbBancoDistribui
+    Cedente.PIX.TipoChavePIX = tchNenhuma
+    DirArqRemessa = 'c:\temp'
+    NumeroArquivo = 0
+    LayoutRemessa = c240
+    ACBrBoletoFC = ACBrBoletoFCFortes1
+    RemoveAcentosArqRemessa = True
+    Configuracoes.Arquivos.LogRegistro = False
+    Configuracoes.WebService.SSLHttpLib = httpOpenSSL
+    Configuracoes.WebService.StoreName = 'My'
+    Configuracoes.WebService.Ambiente = taHomologacao
+    Configuracoes.WebService.Operacao = tpInclui
+    Configuracoes.WebService.VersaoDF = '1.2'
+    Left = 232
+    Top = 40
+  end
+  object ACBrBoletoFCFortes1: TACBrBoletoFCFortes
+    LayOut = lPadraoEntrega2
+    MostrarPreview = False
+    MostrarSetup = False
+    MostrarProgresso = False
+    SoftwareHouse = 'SoftSolWeb - softsolweb.com.br'
+    Left = 328
+    Top = 40
+  end
+  object ACBrMail1: TACBrMail
+    Host = '127.0.0.1'
+    Port = '25'
+    SetSSL = False
+    SetTLS = False
+    Attempts = 3
+    DefaultCharset = UTF_8
+    IDECharset = CP1252
+    Left = 232
+    Top = 120
   end
 end
