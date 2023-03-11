@@ -12,6 +12,7 @@ uses
   Interfaces,
   Forms,
   indylaz,
+  rxnew,
   boleto.view.principal,
   boleto.util.converte.arquivo.base64,
   boleto.util.biblioteca,

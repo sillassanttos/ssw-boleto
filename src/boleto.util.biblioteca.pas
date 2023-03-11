@@ -12,6 +12,8 @@ function Qt(AValue: string = ''): string;
 function IfThen(ACondicao: Boolean; AVerdadeiro, AFalso: string): string;
 
 const
+  captionApp = 'Boletos Bancários - Remessa e Retorno';
+
   sl  = sLineBreak;
   sl2 = sl + sl;
 

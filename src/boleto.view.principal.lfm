@@ -1,8 +1,68 @@
 object PrincipalView: TPrincipalView
-  Left = 237
-  Height = 240
-  Top = 86
-  Width = 320
+  Left = 235
+  Height = 335
+  Top = 82
+  Width = 534
   Caption = 'PrincipalView'
+  ClientHeight = 335
+  ClientWidth = 534
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   LCLVersion = '2.2.6.0'
+  object stbPrincipal: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 312
+    Width = 534
+    Panels = <    
+      item
+        Text = 'Licenciado para: '
+        Width = 50
+      end>
+    SimplePanel = False
+  end
+  object pnlTitulo: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 534
+    Align = alTop
+    BevelOuter = bvNone
+    Caption = 'titulo'
+    TabOrder = 1
+  end
+  object pnlCentral: TPanel
+    Left = 0
+    Height = 262
+    Top = 50
+    Width = 534
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 262
+    ClientWidth = 534
+    TabOrder = 2
+    object edtPorta: TRxSpinEdit
+      Left = 24
+      Height = 23
+      Top = 56
+      Width = 80
+      TabOrder = 0
+    end
+    object lblPorta: TRxLabel
+      Left = 24
+      Height = 15
+      Top = 32
+      Width = 30
+      Caption = 'Porta'
+    end
+    object btnIniciar: TButton
+      Left = 24
+      Height = 30
+      Top = 90
+      Width = 75
+      Caption = 'Iniciar'
+      OnClick = btnIniciarClick
+      TabOrder = 2
+    end
+  end
 end
