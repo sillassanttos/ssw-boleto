@@ -5,23 +5,17 @@ unit boleto.util.converte.arquivo.base64;
 interface
 
 uses
-  //IdCoderMIME,
   IdCoderMIME,
   Classes,
   SysUtils;
 
 type
-
-  { TConverteArquivoBase64 }
-
   TConverteArquivoBase64 = class
   public
     class function Converter(const AArquivo: string): string;
   end;
 
 implementation
-
-{ TConverteArquivoBase64 }
 
 class function TConverteArquivoBase64.Converter(const AArquivo: string): string;
 var

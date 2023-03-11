@@ -9,12 +9,12 @@ uses
   {$IFDEF HASAMIGA}
   athreads,
   {$ENDIF}
-  Interfaces, // this includes the LCL widgetset
+  Interfaces,
   Forms,
   indylaz,
   boleto.view.principal,
-  boleto.util.converte.arquivo.base64
-  { you can add units after this };
+  boleto.util.converte.arquivo.base64,
+  boleto.util.biblioteca;
 
 {$R *.res}
 

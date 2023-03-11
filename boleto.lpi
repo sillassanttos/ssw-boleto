@@ -47,6 +47,10 @@
         <Filename Value="src\boleto.util.converte.arquivo.base64.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="src\boleto.util.biblioteca.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
