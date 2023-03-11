@@ -14,7 +14,8 @@ uses
   indylaz,
   boleto.view.principal,
   boleto.util.converte.arquivo.base64,
-  boleto.util.biblioteca;
+  boleto.util.biblioteca,
+  boleto.util.terceiro.j4dl;
 
 {$R *.res}
 

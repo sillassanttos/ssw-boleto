@@ -51,6 +51,10 @@
         <Filename Value="src\boleto.util.biblioteca.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="src\boleto.util.terceiro.j4dl.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
