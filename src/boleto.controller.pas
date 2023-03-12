@@ -9,6 +9,7 @@ uses
   //Horse.OctetStream,
   Classes,
   SysUtils,
+  boleto.database,
   boleto.util.biblioteca,
   boleto.util.terceiro.j4dl;
 
@@ -30,12 +31,22 @@ begin
   end;
 end;
 
+procedure DoGerarBoleto(Req: THorseRequest; Res: THorseResponse);
+begin
+  with TDM.Create(nil) do
+  try
+    Res.Send(GerarBoleto(Req.Params['id_empresa'], Req.Params['id_receber'], Req.Params['parcela']));
+  finally
+    Free;
+  end;
+end;
+
 { TBoletoController }
 class procedure TBoletoController.Registry;
 begin
   THorse
-    .Get(GPrefixo + 'status', DoStatus);
-    //.Get(PREFIXO + 'gerar/:id_empresa/:id_receber/:parcela', DoGerarBoleto)
+    .Get(GPrefixo + 'status', DoStatus)
+    .Get(GPrefixo + 'gerar/:id_empresa/:id_receber/:parcela', DoGerarBoleto)
     //.Get(PREFIXO + 'remessa/:id_empresa/:id_remessa', DoGerarRemessa)
     //.Put(PREFIXO + 'enviar-email', DoEnviarEmail)
 end;

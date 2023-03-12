@@ -27,9 +27,6 @@ uses
   boleto.util.converte.arquivo.base64;
 
 type
-
-  { TDM }
-
   TDM = class(TDataModule)
     ACBrBoleto1: TACBrBoleto;
     ACBrBoletoFCFortes1: TACBrBoletoFCFortes;
@@ -53,6 +50,7 @@ type
     FQryReceberDetalhe: TZQuery;
 
     function CriarQuery: TZQuery;
+
     procedure AbrirEmpresa(const AIDEmpresa: string);
     procedure AbrirReceber(const AIDEmpresa, AIDReceber, AParcela: string);
     procedure ConfigurarBoleta;
@@ -87,6 +85,8 @@ end;
 
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
+  FRetorno := TJson.Create;
+
   FQryEmpresa := CriarQuery;
   FQryEmpresa.AfterOpen := QryEmpresaAfterOpen;
 
@@ -111,6 +111,8 @@ begin
   FreeAndNil(FQryConfiguracao);
   FreeAndNil(FQryRemessa);
   FreeAndNil(FQryReceberDetalhe);
+
+  FreeAndNil(FRetorno);
 end;
 
 procedure TDM.QryEmpresaAfterOpen(DataSet: TDataSet);
@@ -278,9 +280,8 @@ begin
       sl, '   join empresa_endereco ee ',
       sl, '     on ee.id_empresa = e.id ',
       sl, '    and ee.tipo = ', Qt('P'), ' /* P-Principal */ ',
-      sl, '  where e.id = :id_empresa '
+      sl, '  where e.id = ', AIDEmpresa
     );
-  FQryEmpresa.ParamByName('id_empresa').AsString := AIDEmpresa;
   FQryEmpresa.Open;
 end;
 
@@ -305,17 +306,13 @@ begin
     '  where rd.id_receber = r.id ', sl,
     '    and rd.data_pagamento is null ',sl,
     '    and rd.baixada    = ', Qt('N'), sl,
-    '    and r.id          = :id_receber ', sl,
-    '    and r.id_empresa  = :id_empresa ', sl,
-    IfThen((not AParcela.Trim.IsEmpty) and (StrToInt(AParcela) > 0), '    and rd.parcela    = :parcela ', '')
+    '    and r.id          = ', AIDReceber, sl,
+    '    and r.id_empresa  = ', AIDEmpresa, sl,
+    IfThen((not AParcela.Trim.IsEmpty) and (StrToInt(AParcela) > 0), '    and rd.parcela = ' + AParcela, '')
   );
 
   FQryReceber.Close;
   FQryReceber.SQL.Text := LSql;
-  FQryReceber.ParamByName('id_empresa').AsString := AIDEmpresa;
-  FQryReceber.ParamByName('id_receber').AsString := AIDReceber;
-  if (not AParcela.Trim.IsEmpty) and (StrToInt(AParcela) > 0) then
-    FQryReceber.ParamByName('parcela').AsString  := AParcela;
   FQryReceber.Open;
 end;
 
@@ -613,9 +610,15 @@ begin
     if GerarRemessa.Trim.Equals('S') then
     begin
       FQryRemessa.Close;
-      FQryRemessa.ParamByName('id_empresa').AsString := AIDEmpresa;
-      FQryRemessa.ParamByName('id_receber').AsString := AIDReceber;
-      FQryRemessa.ParamByName('parcela').AsString    := FQryReceber.FieldByName('parcela').Asstring;
+      FQryRemessa.SQL.Text :=
+        Concat(
+          sl, ' select * ',
+          sl, '   from remessa ',
+          sl, '  where id_empresa = ', AIDEmpresa,
+          sl, '    and id_receber = ', AIDReceber,
+          sl, '    and parcela    = ', FQryReceber.FieldByName('parcela').Asstring
+        );
+
       FQryRemessa.Open;
       if FQryRemessa.IsEmpty then
         FQryRemessa.Append
@@ -645,10 +648,15 @@ begin
   ACBrBoleto1.GerarPDF;
 end;
 
-procedure TDM.ProcessaRetorno(const AMensagem: string; const ASucesso: Boolean;
-  const ABase64: string);
+procedure TDM.ProcessaRetorno(const AMensagem: string; const ASucesso: Boolean; const ABase64: string);
 begin
+  FRetorno.Clear;
 
+  FRetorno.Put('sucesso' , ASucesso);
+  FRetorno.Put('mensagem', AMensagem);
+
+  if not ABase64.Trim.IsEmpty then
+    FRetorno.Put('fileBS64', ABase64);
 end;
 
 function TDM.GerarBoleto(const AIDEmpresa, AIDReceber, AParcela: string): string;
