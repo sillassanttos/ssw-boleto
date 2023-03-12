@@ -18,13 +18,8 @@ uses
   rxspin,
   rxctrls,
   Horse,
-  //Horse.Jhonson,
-  //Horse.HandleException,
-  //Horse.OctetStream,
   Horse.Logger,
   Horse.Logger.Provider.LogFile,
-  //DataSet.Serialize,
-  //DataSet.Serialize.Config,
   boleto.util.biblioteca,
   boleto.controller;
 
@@ -70,17 +65,11 @@ begin
 
   pnlTitulo.Caption := GTituloApp;
 
-  LLogFileConfig := THorseLoggerLogFileConfig
-    .New
-      .SetDir(ExtractFilePath(ParamStr(0)) + 'Log\');
+  LLogFileConfig := THorseLoggerLogFileConfig.New.SetDir(ExtractFilePath(ParamStr(0)) + 'Log\');
 
   THorseLoggerManager.RegisterProvider(THorseLoggerProviderLogFile.New());
 
-  THorse
-    //.Use(Jhonson())
-    //.Use(HandleException)
-    //.Use(OctetStream)
-    .Use(THorseLoggerManager.HorseCallback);
+  THorse.Use(THorseLoggerManager.HorseCallback);
 
   TBoletoController.Registry;
 end;

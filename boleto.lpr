@@ -10,7 +10,8 @@ uses
   athreads,
   {$ENDIF}
   Interfaces,
-  Forms, zcomponent,
+  Forms,
+  zcomponent,
   indylaz,
   rxnew,
   boleto.view.principal,
@@ -23,11 +24,14 @@ uses
 {$R *.res}
 
 begin
-  RequireDerivedFormResource:=True;
-  Application.Scaled:=True;
+  RequireDerivedFormResource := True;
+
+  Application.Scaled := True;
+
   Application.Initialize;
+
   Application.CreateForm(TPrincipalView, PrincipalView);
-  Application.CreateForm(TDM, DM);
+
   Application.Run;
 end.
 

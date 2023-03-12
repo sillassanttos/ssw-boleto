@@ -27,6 +27,9 @@ uses
   boleto.util.converte.arquivo.base64;
 
 type
+
+  { TDM }
+
   TDM = class(TDataModule)
     ACBrBoleto: TACBrBoleto;
     ACBrBoletoFCFortes: TACBrBoletoFCFortes;
@@ -58,6 +61,8 @@ type
     procedure ProcessaRetorno(const AMensagem: string; const ASucesso: Boolean = True; const ABase64: string = '');
   public
     function GerarBoleto(const AIDEmpresa, AIDReceber, AParcela: string): string;
+    function GetEnviarEmail(const AIDEmpresa, AIDREceber, AParcela, ADestino: string): string;
+    function GerarRemessa(const AIDEmpresa, AIDRemessas: string): string;
   end;
 
 var
@@ -550,25 +555,6 @@ begin
       Sacado.CEP         := FQryPessoa.FieldByName('cep').AsString;
       Sacado.Complemento := FQryPessoa.FieldByName('complemento').AsString;
 
-      {
-      ValorDesconto      := qryConfiguracaovalor_desconto.Ascurrency;
-      ValorMoraJuros     := qryConfiguracaovalor_mora.Ascurrency;
-      ValorAbatimento    := qryConfiguracaovalor_deducao.AsCurrency;
-      PercentualMulta    := 0.00;
-
-      if qryConfiguracaovalor_mora.Ascurrency > 0 then
-        DataMoraJuros     := Vencimento + 15;
-
-      if qryConfiguracaovalor_desconto.Ascurrency > 0 then
-        DataDesconto       := Vencimento - 10;
-
-      if qryConfiguracaovalor_deducao.Ascurrency > 0 then
-        DataAbatimento     := Vencimento - 15;
-
-      if qryConfiguracaovalor_mora.Ascurrency > 0 then
-        DataProtesto       := Vencimento + 20;
-      }
-
       LocalPagamento     := FQryConfiguracao.FieldByName('local_pagamento').AsString;
       Mensagem.Text      := FQryConfiguracao.FieldByName('instrucao_ao_sacado').AsString;
 
@@ -677,6 +663,217 @@ begin
       ProcessaRetorno(E.Message, False);
     end;
   finally
+    Result := FRetorno.Stringify;
+  end;
+end;
+
+function TDM.GetEnviarEmail(const AIDEmpresa, AIDREceber, AParcela, ADestino: string): string;
+var
+  LCopiaEmail: TStringList;
+  LCorpoMensagem: TStringList;
+
+  LNomeEmitente: string;
+  LAssuntoMensagem: string;
+  LDiretorio: string;
+  LArquivo: string;
+begin
+  try
+    try
+      PrepararBoleto(AIDEmpresa, AIDReceber, AParcela, 'N', LDiretorio, LArquivo);
+
+      if ADestino.Trim.IsEmpty then
+        raise Exception.Create('Destinatário da mensagem não informado.');
+
+      LCopiaEmail := TStringList.Create;
+      try
+        try
+          LCorpoMensagem := TStringList.Create;
+          try
+            LCorpoMensagem := TStringList.Create;
+            LCorpoMensagem.Clear;
+
+            ACBrBoleto.EnviarEmail(ADestino ,'Envio de Boleto', LCorpoMensagem, True);
+
+            ProcessaRetorno('Email enviado com sucesso');
+          finally
+            LCorpoMensagem.Free;
+          end;
+        except on E: Exception do
+          raise Exception.Create(PWideChar('Erro ao enviar e-mail: ' + sl + E.Message));
+        end;
+      finally
+        LCopiaEmail.Free;
+      end;
+    except on E: Exception do
+      ProcessaRetorno(E.Message, False);
+    end;
+  finally
+    Result := FRetorno.Stringify;
+  end;
+end;
+
+function TDM.GerarRemessa(const AIDEmpresa, AIDRemessas: string): string;
+var
+  LTitulo: TACBrTitulo;
+
+  LArquivoRemessa: string;
+
+  LRemessa: Integer;
+
+  LDataProcessamento: TDateTime;
+
+  LQryPesquisa: TZQuery;
+begin
+  try
+    LQryPesquisa := CriarQuery;
+    try
+      AbrirEmpresa(AIDEmpresa);
+
+      ConfigurarBoleta;
+
+      LQryPesquisa.Close;
+      LQryPesquisa.SQL.Text :=
+        Concat(
+          sl, ' select r.id ',
+          sl, '      , r.id_empresa ',
+          sl, '      , r.id_receber ',
+          sl, '      , d.id as id_titulo ',
+          sl, '      , r.parcela ',
+          sl, '      , r.dt_emissao ',
+          sl, '      , r.dt_vencimento ',
+          sl, '      , r.valor ',
+          sl, '      , r.cli_razaosocial ',
+          sl, '      , r.cli_cpfcnpj ',
+          sl, '      , r.cli_endereco ',
+          sl, '      , r.cli_numero ',
+          sl, '      , r.cli_bairro ',
+          sl, '      , r.cli_cidade ',
+          sl, '      , r.cli_uf ',
+          sl, '      , r.cli_cep ',
+          sl, '      , r.dt_pagamento ',
+          sl, '      , r.cancelamento_loja ',
+          sl, '      , r.pagamento_loja ',
+          sl, '      , r.alteracao_loja ',
+          sl, '      , r.selecionada ',
+          sl, '   from remessa r ',
+          sl, '      , receber_detalhe d ',
+          sl, '  where d.id_receber = r.id_receber ',
+          sl, '    and d.parcela  = r.parcela ',
+          sl, '    and r.id_empresa = ', AIDEmpresa,
+          sl, '    and r.id in (', AIDRemessas, ') '
+        );
+      LQryPesquisa.Open;
+      LQryPesquisa.FetchAll;
+
+      if LQryPesquisa.IsEmpty then
+        raise Exception.Create('Nenhum registro encontrado com os parametros informados!');
+
+      LRemessa := StrToInt(FormatDateTime('yyyymmdd', Now));
+
+      ACBrBoleto.NomeArqRemessa := Concat('rem', LRemessa.ToString, '.rem');
+
+      LDataProcessamento := Now;
+
+      ACBrBoleto.ListadeBoletos.Clear;
+
+      LQryPesquisa.First;
+      while not LQryPesquisa.Eof do
+      try
+        LTitulo := ACBrBoleto.CriarTituloNaLista;
+        with LTitulo do
+        begin
+          OcorrenciaOriginal.Tipo := toRemessaRegistrar;
+          Vencimento              := LQryPesquisa.FieldByName('dt_vencimento').AsDateTime;
+          DataDocumento           := LQryPesquisa.FieldByName('dt_emissao').AsDateTime;
+          NumeroDocumento         := LQryPesquisa.FieldByName('id_titulo').AsString;
+          EspecieDoc              := '';
+          Aceite                  := atSim;
+          DataProcessamento       := LDataProcessamento;
+          Carteira                := FQryConfiguracao.FieldByName('conta_carteira').AsString;
+
+          if ACBrBoleto.Banco.Numero = 1 then
+            NossoNumero           := Carteira + LQryPesquisa.FieldByName('parcela').AsString
+          else
+            NossoNumero           := LQryPesquisa.FieldByName('parcela').AsString;
+
+          ValorDocumento          := LQryPesquisa.FieldByName('valor').AsCurrency;
+          Sacado.NomeSacado       := LQryPesquisa.FieldByName('cli_razaosocial').AsString;
+
+          case LQryPesquisa.FieldByName('cli_cpfcnpj').AsString.Trim.Length of
+            11 : Sacado.Pessoa    := pFisica;
+            14 : Sacado.Pessoa    := pJuridica;
+          else
+            raise Exception.Create(
+              Concat(
+                'Erro com CPF/CNPJ Cliente: ',  sl,
+                LQryPesquisa.FieldByName('cli_cpfcnpj').AsString, ' | ',
+                LQryPesquisa.FieldByName('cli_razaosocial').AsString
+              )
+            );
+          end;
+
+          Sacado.CNPJCPF          := RemoveChar(LQryPesquisa.FieldByName('cli_cpfcnpj').AsString);
+          Sacado.Logradouro       := LQryPesquisa.FieldByName('cli_endereco').AsString;
+          Sacado.Numero           := LQryPesquisa.FieldByName('cli_numero').AsString;
+          Sacado.Bairro           := LQryPesquisa.FieldByName('cli_bairro').AsString;
+          Sacado.Cidade           := LQryPesquisa.FieldByName('cli_cidade').AsString;
+          Sacado.UF               := LQryPesquisa.FieldByName('cli_uf').AsString;
+          Sacado.CEP              := RemoveChar(LQryPesquisa.FieldByName('cli_cep').AsString);
+          LocalPagamento          := FQryConfiguracao.FieldByName('local_pagamento').AsString;
+          ValorAbatimento         := 0.00;
+          ValorMoraJuros          := 0.00;
+          ValorDesconto           := 0.00;
+          ValorAbatimento         := 0.00;
+          DataMoraJuros           := 0.00;
+          DataDesconto            := 0.00;
+          DataAbatimento          := 0.00;
+          DataProtesto            := 0.00;
+          PercentualMulta         := 0.00;
+          Mensagem.Text           := FQryConfiguracao.FieldByName('instrucao_ao_sacado').AsString;
+          OcorrenciaOriginal.Tipo := toRemessaRegistrar;
+          Instrucao1              := PadRight(trim(FQryConfiguracao.FieldByName('instrucao1').AsString), 2, '0');
+          Instrucao2              := PadRight(trim(FQryConfiguracao.FieldByName('instrucao2').AsString), 2, '0');
+        end;
+
+        FQryReceberDetalhe.Close;
+        FQryReceberDetalhe.SQL.Text :=
+          Concat(
+            sl, ' select * ',
+            sl, '   from receber_detalhe ',
+            sl, '  where id = ', LQryPesquisa.FieldByName('id_titulo').AsString
+          );
+        FQryReceberDetalhe.Open;
+
+        FQryReceberDetalhe.Edit;
+        FQryReceberDetalhe.FieldByName('remessa_gerada').AsString := 'S';
+        FQryReceberDetalhe.FieldByName('boleto_gerado').AsString  := 'S';
+        FQryReceberDetalhe.Post;
+      finally
+        LQryPesquisa.Next;
+      end;
+
+      LArquivoRemessa := ACBrBoleto.GerarRemessa(LRemessa);
+
+      LQryPesquisa.Close;
+      LQryPesquisa.SQL.Text :=
+        Concat(
+          sl, ' delete ',
+          sl, '   from remessa ',
+          sl, '  where id_empresa = ', AIDEmpresa,
+          sl, '    and id in (', AIDRemessas, ') '
+        );
+      LQryPesquisa.ExecSQL;
+
+      ProcessaRetorno('Remessa gerada com sucesso', True, TConverteArquivoBase64.Converter(LArquivoRemessa));
+    except
+      on E: Exception do
+      begin
+        ProcessaRetorno(E.Message, False);
+      end;
+    end;
+  finally
+    FreeAndNil(LQryPesquisa);
+
     Result := FRetorno.Stringify;
   end;
 end;
