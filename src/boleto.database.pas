@@ -28,10 +28,10 @@ uses
 
 type
   TDM = class(TDataModule)
-    ACBrBoleto1: TACBrBoleto;
-    ACBrBoletoFCFortes1: TACBrBoletoFCFortes;
+    ACBrBoleto: TACBrBoleto;
+    ACBrBoletoFCFortes: TACBrBoletoFCFortes;
     ACBrExtenso: TACBrExtenso;
-    ACBrMail1: TACBrMail;
+    ACBrMail: TACBrMail;
     Conexao: TZConnection;
     procedure ConexaoBeforeConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
@@ -233,13 +233,13 @@ end;
 
 procedure TDM.QryConfiguracaoAfterOpen(DataSet: TDataSet);
 begin
-  ACBrMail1.IsHTML   := False;
-  ACBrMail1.Host     := FQryConfiguracao.FieldByName('email_host').AsString.Trim;
-  ACBrMail1.Port     := FQryConfiguracao.FieldByName('email_porta').AsString.Trim;
-  ACBrMail1.Username := FQryConfiguracao.FieldByName('email_remetente').AsString.Trim;
-  ACBrMail1.Password := FQryConfiguracao.FieldByName('email_senha').AsString.Trim;
-  ACBrMail1.SetSSL   := FQryConfiguracao.FieldByName('email_ssl').AsString.Trim.Equals('S');
-  ACBrMail1.SetTLS   := FQryConfiguracao.FieldByName('email_tls').AsString.Trim.Equals('S');
+  ACBrMail.IsHTML   := False;
+  ACBrMail.Host     := FQryConfiguracao.FieldByName('email_host').AsString.Trim;
+  ACBrMail.Port     := FQryConfiguracao.FieldByName('email_porta').AsString.Trim;
+  ACBrMail.Username := FQryConfiguracao.FieldByName('email_remetente').AsString.Trim;
+  ACBrMail.Password := FQryConfiguracao.FieldByName('email_senha').AsString.Trim;
+  ACBrMail.SetSSL   := FQryConfiguracao.FieldByName('email_ssl').AsString.Trim.Equals('S');
+  ACBrMail.SetTLS   := FQryConfiguracao.FieldByName('email_tls').AsString.Trim.Equals('S');
 end;
 
 function TDM.CriarQuery: TZQuery;
@@ -320,108 +320,108 @@ procedure TDM.ConfigurarBoleta;
 var
   LDirLogo: string;
 begin
-  ACBrBoleto1.LayoutRemessa := c240;
+  ACBrBoleto.LayoutRemessa := c240;
 
   LDirLogo := ExtractFilePath(Application.ExeName) + 'Logos\Colorido\';
   if DirectoryExists(LDirLogo) then
-    ACBrBoletoFCFortes1.DirLogo := LDirLogo;
+    ACBrBoletoFCFortes.DirLogo := LDirLogo;
 
   case FQryConfiguracao.FieldByName('layout_impressao').AsInteger of
-    0: ACBrBoleto1.ACBrBoletoFC.LayOut := lPadrao;
-    1: ACBrBoleto1.ACBrBoletoFC.LayOut := lCarne;
-    2: ACBrBoleto1.ACBrBoletoFC.LayOut := lFatura;
-    3: ACBrBoleto1.ACBrBoletoFC.LayOut := lPadraoEntrega;
-    4: ACBrBoleto1.ACBrBoletoFC.LayOut := lReciboTopo;
-    5: ACBrBoleto1.ACBrBoletoFC.LayOut := lPadraoEntrega2;
-    6: ACBrBoleto1.ACBrBoletoFC.LayOut := lFaturaDetal;
-    7: ACBrBoleto1.ACBrBoletoFC.LayOut := lTermica80mm;
+    0: ACBrBoleto.ACBrBoletoFC.LayOut := lPadrao;
+    1: ACBrBoleto.ACBrBoletoFC.LayOut := lCarne;
+    2: ACBrBoleto.ACBrBoletoFC.LayOut := lFatura;
+    3: ACBrBoleto.ACBrBoletoFC.LayOut := lPadraoEntrega;
+    4: ACBrBoleto.ACBrBoletoFC.LayOut := lReciboTopo;
+    5: ACBrBoleto.ACBrBoletoFC.LayOut := lPadraoEntrega2;
+    6: ACBrBoleto.ACBrBoletoFC.LayOut := lFaturaDetal;
+    7: ACBrBoleto.ACBrBoletoFC.LayOut := lTermica80mm;
   else
-    ACBrBoleto1.ACBrBoletoFC.LayOut := lPadrao;
+    ACBrBoleto.ACBrBoletoFC.LayOut := lPadrao;
   end;
 
   case FQryConfiguracao.FieldByName('tipo_cobranca').AsInteger of
-     0 : ACBrBoleto1.Banco.TipoCobranca := cobNenhum;
-     1 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDoBrasil;
-     2 : ACBrBoleto1.Banco.TipoCobranca := cobSantander;
-     3 : ACBrBoleto1.Banco.TipoCobranca := cobCaixaEconomica;
-     4 : ACBrBoleto1.Banco.TipoCobranca := cobCaixaSicob;
-     5 : ACBrBoleto1.Banco.TipoCobranca := cobBradesco;
-     6 : ACBrBoleto1.Banco.TipoCobranca := cobItau;
-     7 : ACBrBoleto1.Banco.TipoCobranca := cobBancoMercantil;
-     8 : ACBrBoleto1.Banco.TipoCobranca := cobSicred;
-     9 : ACBrBoleto1.Banco.TipoCobranca := cobBancoob;
-    10 : ACBrBoleto1.Banco.TipoCobranca := cobBanrisul;
-    11 : ACBrBoleto1.Banco.TipoCobranca := cobBanestes;
-    12 : ACBrBoleto1.Banco.TipoCobranca := cobHSBC;
-    13 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDoNordeste;
-    14 : ACBrBoleto1.Banco.TipoCobranca := cobBRB;
-    15 : ACBrBoleto1.Banco.TipoCobranca := cobBicBanco;
-    16 : ACBrBoleto1.Banco.TipoCobranca := cobBradescoSICOOB;
-    17 : ACBrBoleto1.Banco.TipoCobranca := cobBancoSafra;
-    18 : ACBrBoleto1.Banco.TipoCobranca := cobSafraBradesco;
-    19 : ACBrBoleto1.Banco.TipoCobranca := cobBancoCECRED;
-    20 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDaAmazonia;
-    21 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDoBrasilSICOOB;
-    22 : ACBrBoleto1.Banco.TipoCobranca := cobUniprime;
-    23 : ACBrBoleto1.Banco.TipoCobranca := cobUnicredRS;
-    24 : ACBrBoleto1.Banco.TipoCobranca := cobBanese;
-    25 : ACBrBoleto1.Banco.TipoCobranca := cobCrediSIS;
-    26 : ACBrBoleto1.Banco.TipoCobranca := cobUnicredES;
-    27 : ACBrBoleto1.Banco.TipoCobranca := cobBancoCresolSCRS;
-    28 : ACBrBoleto1.Banco.TipoCobranca := cobCitiBank;
-    29 : ACBrBoleto1.Banco.TipoCobranca := cobBancoABCBrasil;
-    30 : ACBrBoleto1.Banco.TipoCobranca := cobDaycoval;
-    31 : ACBrBoleto1.Banco.TipoCobranca := cobUniprimeNortePR;
-    32 : ACBrBoleto1.Banco.TipoCobranca := cobBancoPine;
-    33 : ACBrBoleto1.Banco.TipoCobranca := cobBancoPineBradesco;
-    34 : ACBrBoleto1.Banco.TipoCobranca := cobUnicredSC;
-    35 : ACBrBoleto1.Banco.TipoCobranca := cobBancoAlfa;
-    36 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDoBrasilAPI;
-    37 : ACBrBoleto1.Banco.TipoCobranca := cobBancoDoBrasilWS;
-    38 : ACBrBoleto1.Banco.TipoCobranca := cobBancoCresol;
-    39 : ACBrBoleto1.Banco.TipoCobranca := cobMoneyPlus;
-    40 : ACBrBoleto1.Banco.TipoCobranca := cobBancoC6;
-    41 : ACBrBoleto1.Banco.TipoCobranca := cobBancoRendimento;
-    42 : ACBrBoleto1.Banco.TipoCobranca := cobBancoInter;
-    43 : ACBrBoleto1.Banco.TipoCobranca := cobBancoSofisaSantander;
-    44 : ACBrBoleto1.Banco.TipoCobranca := cobBS2;
-    45 : ACBrBoleto1.Banco.TipoCobranca := cobPenseBankAPI;
-    46 : ACBrBoleto1.Banco.TipoCobranca := cobBTGPactual;
+     0 : ACBrBoleto.Banco.TipoCobranca := cobNenhum;
+     1 : ACBrBoleto.Banco.TipoCobranca := cobBancoDoBrasil;
+     2 : ACBrBoleto.Banco.TipoCobranca := cobSantander;
+     3 : ACBrBoleto.Banco.TipoCobranca := cobCaixaEconomica;
+     4 : ACBrBoleto.Banco.TipoCobranca := cobCaixaSicob;
+     5 : ACBrBoleto.Banco.TipoCobranca := cobBradesco;
+     6 : ACBrBoleto.Banco.TipoCobranca := cobItau;
+     7 : ACBrBoleto.Banco.TipoCobranca := cobBancoMercantil;
+     8 : ACBrBoleto.Banco.TipoCobranca := cobSicred;
+     9 : ACBrBoleto.Banco.TipoCobranca := cobBancoob;
+    10 : ACBrBoleto.Banco.TipoCobranca := cobBanrisul;
+    11 : ACBrBoleto.Banco.TipoCobranca := cobBanestes;
+    12 : ACBrBoleto.Banco.TipoCobranca := cobHSBC;
+    13 : ACBrBoleto.Banco.TipoCobranca := cobBancoDoNordeste;
+    14 : ACBrBoleto.Banco.TipoCobranca := cobBRB;
+    15 : ACBrBoleto.Banco.TipoCobranca := cobBicBanco;
+    16 : ACBrBoleto.Banco.TipoCobranca := cobBradescoSICOOB;
+    17 : ACBrBoleto.Banco.TipoCobranca := cobBancoSafra;
+    18 : ACBrBoleto.Banco.TipoCobranca := cobSafraBradesco;
+    19 : ACBrBoleto.Banco.TipoCobranca := cobBancoCECRED;
+    20 : ACBrBoleto.Banco.TipoCobranca := cobBancoDaAmazonia;
+    21 : ACBrBoleto.Banco.TipoCobranca := cobBancoDoBrasilSICOOB;
+    22 : ACBrBoleto.Banco.TipoCobranca := cobUniprime;
+    23 : ACBrBoleto.Banco.TipoCobranca := cobUnicredRS;
+    24 : ACBrBoleto.Banco.TipoCobranca := cobBanese;
+    25 : ACBrBoleto.Banco.TipoCobranca := cobCrediSIS;
+    26 : ACBrBoleto.Banco.TipoCobranca := cobUnicredES;
+    27 : ACBrBoleto.Banco.TipoCobranca := cobBancoCresolSCRS;
+    28 : ACBrBoleto.Banco.TipoCobranca := cobCitiBank;
+    29 : ACBrBoleto.Banco.TipoCobranca := cobBancoABCBrasil;
+    30 : ACBrBoleto.Banco.TipoCobranca := cobDaycoval;
+    31 : ACBrBoleto.Banco.TipoCobranca := cobUniprimeNortePR;
+    32 : ACBrBoleto.Banco.TipoCobranca := cobBancoPine;
+    33 : ACBrBoleto.Banco.TipoCobranca := cobBancoPineBradesco;
+    34 : ACBrBoleto.Banco.TipoCobranca := cobUnicredSC;
+    35 : ACBrBoleto.Banco.TipoCobranca := cobBancoAlfa;
+    36 : ACBrBoleto.Banco.TipoCobranca := cobBancoDoBrasilAPI;
+    37 : ACBrBoleto.Banco.TipoCobranca := cobBancoDoBrasilWS;
+    38 : ACBrBoleto.Banco.TipoCobranca := cobBancoCresol;
+    39 : ACBrBoleto.Banco.TipoCobranca := cobMoneyPlus;
+    40 : ACBrBoleto.Banco.TipoCobranca := cobBancoC6;
+    41 : ACBrBoleto.Banco.TipoCobranca := cobBancoRendimento;
+    42 : ACBrBoleto.Banco.TipoCobranca := cobBancoInter;
+    43 : ACBrBoleto.Banco.TipoCobranca := cobBancoSofisaSantander;
+    44 : ACBrBoleto.Banco.TipoCobranca := cobBS2;
+    45 : ACBrBoleto.Banco.TipoCobranca := cobPenseBankAPI;
+    46 : ACBrBoleto.Banco.TipoCobranca := cobBTGPactual;
   else
-    ACBrBoleto1.Banco.TipoCobranca := cobNenhum;
+    ACBrBoleto.Banco.TipoCobranca := cobNenhum;
   end;
 
-  ACBrBoleto1.Cedente.Nome := FQryEmpresa.FieldByName('razao_social').AsString;
+  ACBrBoleto.Cedente.Nome := FQryEmpresa.FieldByName('razao_social').AsString;
 
   if RemoveChar(FQryEmpresa.FieldByName('cnpj').AsString).Trim.Length = 11 then
-    ACBrBoleto1.Cedente.TipoInscricao := pFisica
+    ACBrBoleto.Cedente.TipoInscricao := pFisica
   else
-    ACBrBoleto1.Cedente.TipoInscricao := pJuridica;
+    ACBrBoleto.Cedente.TipoInscricao := pJuridica;
 
-  ACBrBoleto1.Cedente.CNPJCPF       := RemoveChar(FQryEmpresa.FieldByName('cnpj').AsString);
-  ACBrBoleto1.Cedente.CodigoCedente := FQryConfiguracao.FieldByName('codigo_cedente').AsString.Trim;
-  ACBrBoleto1.Cedente.Convenio      := FQryConfiguracao.FieldByName('convenio').AsString.Trim;
-  ACBrBoleto1.Cedente.Modalidade    := FQryConfiguracao.FieldByName('modalidade').AsString.Trim;
-  ACBrBoleto1.Cedente.Agencia       := FQryConfiguracao.FieldByName('agencia_numero').AsString.Trim;
-  ACBrBoleto1.Cedente.AgenciaDigito := FQryConfiguracao.FieldByName('agencia_digito').AsString.Trim;
-  ACBrBoleto1.Cedente.Conta         := FQryConfiguracao.FieldByName('conta_numero').AsString.Trim;
-  ACBrBoleto1.Cedente.ContaDigito   := FQryConfiguracao.FieldByName('conta_digito').AsString.Trim;
-  ACBrBoleto1.Cedente.Logradouro    := FQryEmpresa.FieldByName('endereco').AsString;
-  ACBrBoleto1.Cedente.Complemento   := FQryEmpresa.FieldByName('complemento').AsString;
-  ACBrBoleto1.Cedente.Bairro        := FQryEmpresa.FieldByName('bairro').AsString;
-  ACBrBoleto1.Cedente.Cidade        := FQryEmpresa.FieldByName('cidade').AsString;
-  ACBrBoleto1.Cedente.CEP           := RemoveChar(FQryEmpresa.FieldByName('cep').AsString);
-  ACBrBoleto1.Cedente.UF            := FQryEmpresa.FieldByName('uf').AsString;
-  ACBrBoleto1.Cedente.Telefone      := RemoveChar(FQryEmpresa.FieldByName('telefone').AsString);
+  ACBrBoleto.Cedente.CNPJCPF       := RemoveChar(FQryEmpresa.FieldByName('cnpj').AsString);
+  ACBrBoleto.Cedente.CodigoCedente := FQryConfiguracao.FieldByName('codigo_cedente').AsString.Trim;
+  ACBrBoleto.Cedente.Convenio      := FQryConfiguracao.FieldByName('convenio').AsString.Trim;
+  ACBrBoleto.Cedente.Modalidade    := FQryConfiguracao.FieldByName('modalidade').AsString.Trim;
+  ACBrBoleto.Cedente.Agencia       := FQryConfiguracao.FieldByName('agencia_numero').AsString.Trim;
+  ACBrBoleto.Cedente.AgenciaDigito := FQryConfiguracao.FieldByName('agencia_digito').AsString.Trim;
+  ACBrBoleto.Cedente.Conta         := FQryConfiguracao.FieldByName('conta_numero').AsString.Trim;
+  ACBrBoleto.Cedente.ContaDigito   := FQryConfiguracao.FieldByName('conta_digito').AsString.Trim;
+  ACBrBoleto.Cedente.Logradouro    := FQryEmpresa.FieldByName('endereco').AsString;
+  ACBrBoleto.Cedente.Complemento   := FQryEmpresa.FieldByName('complemento').AsString;
+  ACBrBoleto.Cedente.Bairro        := FQryEmpresa.FieldByName('bairro').AsString;
+  ACBrBoleto.Cedente.Cidade        := FQryEmpresa.FieldByName('cidade').AsString;
+  ACBrBoleto.Cedente.CEP           := RemoveChar(FQryEmpresa.FieldByName('cep').AsString);
+  ACBrBoleto.Cedente.UF            := FQryEmpresa.FieldByName('uf').AsString;
+  ACBrBoleto.Cedente.Telefone      := RemoveChar(FQryEmpresa.FieldByName('telefone').AsString);
 
-  ACBrBoleto1.DirArqRetorno         := ExtractFilePath(Application.ExeName);
-  ACBrBoleto1.DirArqRemessa         := ExtractFilePath(Application.ExeName);
+  ACBrBoleto.DirArqRetorno         := ExtractFilePath(Application.ExeName);
+  ACBrBoleto.DirArqRemessa         := ExtractFilePath(Application.ExeName);
 
-  if not DirectoryExists(ACBrBoleto1.DirArqRetorno) then
-    raise Exception.Create('Diretório de Retorno não existe, favor verificar!' + sLineBreak + sLineBreak + ACBrBoleto1.DirArqRetorno);
+  if not DirectoryExists(ACBrBoleto.DirArqRetorno) then
+    raise Exception.Create('Diretório de Retorno não existe, favor verificar!' + sLineBreak + sLineBreak + ACBrBoleto.DirArqRetorno);
 
-  if not DirectoryExists(ACBrBoleto1.DirArqRemessa) then
-    raise Exception.Create('Diretório de Remessa não existe, favor verificar!' + sLineBreak + sLineBreak + ACBrBoleto1.DirArqRemessa);
+  if not DirectoryExists(ACBrBoleto.DirArqRemessa) then
+    raise Exception.Create('Diretório de Remessa não existe, favor verificar!' + sLineBreak + sLineBreak + ACBrBoleto.DirArqRemessa);
 end;
 
 procedure TDM.PrepararBoleto(const AIDEmpresa, AIDReceber, AParcela, GerarRemessa: string; var ADiretorio: string; var AArquivo: string);
@@ -512,20 +512,20 @@ begin
 
   AArquivo := FQryReceber.FieldByName('id').AsString + '-boleto.pdf';
 
-  ACBrBoleto1.ACBrBoletoFC.NomeArquivo := ADiretorio + AArquivo;
+  ACBrBoleto.ACBrBoletoFC.NomeArquivo := ADiretorio + AArquivo;
 
-  ACBrBoleto1.ListadeBoletos.Clear;
+  ACBrBoleto.ListadeBoletos.Clear;
 
   FQryReceber.First;
   while not FQryReceber.Eof do
   try
-    Titulo:= ACBrBoleto1.CriarTituloNaLista;
+    Titulo:= ACBrBoleto.CriarTituloNaLista;
 
     with Titulo do
     begin
       Carteira           := FQryConfiguracao.FieldByName('conta_carteira').AsString;
       NumeroDocumento    := PadRight(FQryReceber.FieldByName('id_titulo').AsString, 8, '0');
-      if ACBrBoleto1.Banco.Numero = 1 then
+      if ACBrBoleto.Banco.Numero = 1 then
         NossoNumero      := Carteira + FQryReceber.FieldByName('parcela').AsString
       else
         NossoNumero      := FQryReceber.FieldByName('parcela').AsString;
@@ -581,9 +581,9 @@ begin
       if not FQryConfiguracao.FieldByName('instrucao3').AsString.Trim.IsEmpty then
         Mensagem.Add(FQryConfiguracao.FieldByName('instrucao3').AsString);
 
-      ACBrBoleto1.AdicionarMensagensPadroes(Titulo, Mensagem);
+      ACBrBoleto.AdicionarMensagensPadroes(Titulo, Mensagem);
 
-      if ACBrBoleto1.ACBrBoletoFC.LayOut = lFaturaDetal then
+      if ACBrBoleto.ACBrBoletoFC.LayOut = lFaturaDetal then
       begin
         for i:=0 to 3 do
         begin
@@ -645,7 +645,7 @@ begin
   finally
     FQryReceber.Next;
   end;
-  ACBrBoleto1.GerarPDF;
+  ACBrBoleto.GerarPDF;
 end;
 
 procedure TDM.ProcessaRetorno(const AMensagem: string; const ASucesso: Boolean; const ABase64: string);

@@ -32,8 +32,8 @@ object DM: TDM
     Left = 136
     Top = 40
   end
-  object ACBrBoleto1: TACBrBoleto
-    MAIL = ACBrMail1
+  object ACBrBoleto: TACBrBoleto
+    MAIL = ACBrMail
     Banco.Numero = 104
     Banco.TamanhoMaximoNossoNum = 15
     Banco.TipoCobranca = cobCaixaEconomica
@@ -63,7 +63,7 @@ object DM: TDM
     DirArqRemessa = 'c:\temp'
     NumeroArquivo = 0
     LayoutRemessa = c240
-    ACBrBoletoFC = ACBrBoletoFCFortes1
+    ACBrBoletoFC = ACBrBoletoFCFortes
     RemoveAcentosArqRemessa = True
     Configuracoes.Arquivos.LogRegistro = False
     Configuracoes.WebService.SSLHttpLib = httpOpenSSL
@@ -74,7 +74,7 @@ object DM: TDM
     Left = 232
     Top = 40
   end
-  object ACBrBoletoFCFortes1: TACBrBoletoFCFortes
+  object ACBrBoletoFCFortes: TACBrBoletoFCFortes
     LayOut = lPadraoEntrega2
     MostrarPreview = False
     MostrarSetup = False
@@ -83,7 +83,7 @@ object DM: TDM
     Left = 328
     Top = 40
   end
-  object ACBrMail1: TACBrMail
+  object ACBrMail: TACBrMail
     Host = '127.0.0.1'
     Port = '25'
     SetSSL = False
