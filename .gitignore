@@ -3,3 +3,4 @@
 /src/backup
 /bin/boleto.exe
 /bin/**.log
+/bin/**.rem
